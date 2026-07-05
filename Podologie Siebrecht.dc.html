@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:78px}
+  body{margin:0}
+  img{max-width:100%;display:block}
+  ::selection{background:#5d7f63;color:#fff}
+  @keyframes floatUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  details[data-faq] > summary{list-style:none;cursor:pointer}
+  details[data-faq] > summary::-webkit-details-marker{display:none}
+  details[data-faq] > summary .faq-plus{transition:transform .25s ease}
+  details[data-faq][open] > summary .faq-plus{transform:rotate(45deg)}
+  a{color:inherit}
+  image-slot::part(ring){display:none}
+  image-slot::part(empty){display:none}
+  @media (max-width:820px){
+    .desk-nav{display:none !important}
+    .burger{display:inline-flex !important}
+    .hero-grid{grid-template-columns:1fr !important}
+    .two-col{grid-template-columns:1fr !important}
+    .contact-grid{grid-template-columns:1fr !important}
+    .h1{font-size:44px !important}
+    .sec-pad{padding:64px 22px !important}
+  }
+</style>
+</helmet>
+
+<div id="top" style="{{ rootStyle }}">
+
+  <!-- ============ NAV ============ -->
+  <header style="position:sticky;top:0;z-index:60;background:rgba(247,244,236,0.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)">
+    <div style="max-width:1180px;margin:0 auto;padding:0 26px;height:78px;display:flex;align-items:center;justify-content:space-between;gap:18px">
+      <a href="#top" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+        <img alt="Praxis für Podologie Sofie Siebrecht – Ludwigsburg" style="height:54px;width:auto;display:block" src="./logo_podologie-mr7ga3bq.png">
+      </a>
+
+      <nav class="desk-nav" style="display:flex;align-items:center;gap:30px">
+        <a href="#leistungen" style="text-decoration:none;color:var(--ink);font-size:15.5px;font-weight:500">Leistungen</a>
+        <a href="#warum" style="text-decoration:none;color:var(--ink);font-size:15.5px;font-weight:500">Warum wir</a>
+        <a href="#ueber-mich" style="text-decoration:none;color:var(--ink);font-size:15.5px;font-weight:500">Über mich</a>
+        <a href="#ablauf" style="text-decoration:none;color:var(--ink);font-size:15.5px;font-weight:500">Ablauf</a>
+        <a href="#faq" style="text-decoration:none;color:var(--ink);font-size:15.5px;font-weight:500">FAQ</a>
+        <a href="tel:+4971414739500" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:var(--sage-dark);color:#fff;padding:11px 20px;border-radius:999px;font-weight:600;font-size:15px">
+          <span style="font-size:15px">☏</span> 07141 / 47 39 500
+        </a>
+      </nav>
+
+      <button class="burger" onClick="{{ toggleNav }}" aria-label="Menü" style="display:none;align-items:center;justify-content:center;width:46px;height:46px;border:1px solid var(--line);background:var(--surface);border-radius:12px;cursor:pointer;font-size:20px;color:var(--ink)">≡</button>
+    </div>
+
+    <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid var(--line);background:var(--bg);padding:14px 26px 22px;display:flex;flex-direction:column;gap:4px">
+        <a href="#leistungen" onClick="{{ closeNav }}" style="text-decoration:none;color:var(--ink);padding:12px 4px;font-weight:500;border-bottom:1px solid var(--line)">Leistungen</a>
+        <a href="#warum" onClick="{{ closeNav }}" style="text-decoration:none;color:var(--ink);padding:12px 4px;font-weight:500;border-bottom:1px solid var(--line)">Warum wir</a>
+        <a href="#ueber-mich" onClick="{{ closeNav }}" style="text-decoration:none;color:var(--ink);padding:12px 4px;font-weight:500;border-bottom:1px solid var(--line)">Über mich</a>
+        <a href="#ablauf" onClick="{{ closeNav }}" style="text-decoration:none;color:var(--ink);padding:12px 4px;font-weight:500;border-bottom:1px solid var(--line)">Ablauf</a>
+        <a href="#faq" onClick="{{ closeNav }}" style="text-decoration:none;color:var(--ink);padding:12px 4px;font-weight:500;border-bottom:1px solid var(--line)">FAQ</a>
+        <a href="#kontakt" onClick="{{ closeNav }}" style="text-decoration:none;color:var(--ink);padding:12px 4px;font-weight:500;border-bottom:1px solid var(--line)">Kontakt</a>
+        <a href="tel:+4971414739500" style="margin-top:10px;text-decoration:none;text-align:center;background:var(--sage-dark);color:#fff;padding:14px;border-radius:12px;font-weight:600">☏ 07141 / 47 39 500</a>
+      </div>
+    </sc-if>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="sec-pad" style="padding:78px 26px 84px;max-width:1180px;margin:0 auto">
+    <div class="hero-grid" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center">
+      <div style="animation:floatUp .7s ease both">
+        <span style="display:inline-flex;align-items:center;gap:8px;background:var(--sage-soft);color:var(--sage-dark);padding:8px 16px;border-radius:999px;font-size:13.5px;font-weight:600;letter-spacing:.02em">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--sage)"></span> Praxis mit Kassenzulassung
+        </span>
+        <h1 class="h1" style="font-family:'Newsreader',serif;font-weight:500;font-size:62px;line-height:1.04;letter-spacing:-0.01em;margin:22px 0 20px;color:var(--sage-deep);text-wrap:balance">
+          Gesunde Füße,<br>in besten Händen.
+        </h1>
+        <p style="font-size:19px;line-height:1.6;color:var(--muted);max-width:520px;margin:0 0 32px">
+          Medizinische Fußpflege in Ludwigsburg – gründlich, hygienisch und mit Zeit für Sie. Behandelt von <strong style="color:var(--ink);font-weight:600">Sofie Siebrecht</strong>, staatlich geprüfte Podologin.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+          <a href="tel:+4971414739500" style="text-decoration:none;display:inline-flex;align-items:center;gap:10px;background:var(--sage-dark);color:#fff;padding:16px 26px;border-radius:999px;font-weight:600;font-size:17px;box-shadow:0 8px 24px rgba(44,65,51,0.18)">
+            <span style="font-size:18px">☏</span> Termin telefonisch vereinbaren
+          </a>
+          <a href="#kontakt" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:var(--surface);color:var(--sage-dark);padding:16px 24px;border-radius:999px;font-weight:600;font-size:17px;border:1px solid var(--line)">
+            Anfrage senden →
+          </a>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:22px;margin-top:34px;color:var(--muted);font-size:14.5px">
+          <span style="display:inline-flex;align-items:center;gap:8px"><span style="color:var(--sage)">✓</span> Staatlich geprüft</span>
+          <span style="display:inline-flex;align-items:center;gap:8px"><span style="color:var(--sage)">✓</span> Kassenzulassung</span>
+          <span style="display:inline-flex;align-items:center;gap:8px"><span style="color:var(--sage)">✓</span> Mitglied im ZFD</span>
+          <span style="display:inline-flex;align-items:center;gap:8px"><span style="color:var(--sage)">✓</span> Hausbesuche möglich</span>
+        </div>
+      </div>
+
+      <div style="position:relative;animation:floatUp .9s ease both">
+        <image-slot id="hero-praxis" style="width: 100%; height: 520px; border-radius: 26px; overflow: hidden; box-shadow: 0 24px 60px rgba(44,65,51,0.18); background: url(&quot;https://image.jimcdn.com/app/cms/image/transf/dimension=2048x2048:format=jpg/path/s264d99f32bf4a51c/image/ifff0627be28dd5c4/version/1597843844/image.jpg&quot;) center / cover no-repeat" shape="rounded" radius="26" placeholder="Praxis- oder Behandlungsfoto"></image-slot>
+        <div style="position:absolute;left:-22px;bottom:34px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 20px;box-shadow:0 14px 34px rgba(44,65,51,0.14);display:flex;align-items:center;gap:14px">
+          <span style="width:44px;height:44px;border-radius:12px;background:var(--sage-soft);color:var(--sage-dark);display:flex;align-items:center;justify-content:center;font-size:22px">♥</span>
+          <span style="line-height:1.3"><strong style="display:block;font-size:15px;color:var(--ink)">Seit 2016</strong><span style="font-size:13px;color:var(--muted)">Praxis in Ludwigsburg</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTRO / TRUST STRIP ============ -->
+  <section style="background:var(--sage-deep);color:#eef3ec">
+    <div style="max-width:1180px;margin:0 auto;padding:26px;display:flex;flex-wrap:wrap;gap:14px 44px;align-items:center;justify-content:space-between">
+      <p style="margin:0;font-family:'Newsreader',serif;font-size:22px;font-weight:400;font-style:italic;color:#dfe8db;max-width:640px;line-height:1.4">
+        „Ich widme mich der Gesunderhaltung, Heilung und Pflege Ihrer Füße.“
+      </p>
+      <div style="display:flex;gap:34px;flex-wrap:wrap">
+        <div><div style="font-family:'Newsreader',serif;font-size:30px;color:#fff">10+</div><div style="font-size:13px;color:#a9bda9;letter-spacing:.04em">Jahre Erfahrung</div></div>
+        <div><div style="font-family:'Newsreader',serif;font-size:30px;color:#fff">11</div><div style="font-size:13px;color:#a9bda9;letter-spacing:.04em">Behandlungen</div></div>
+        <div><div style="font-family:'Newsreader',serif;font-size:30px;color:#fff">100%</div><div style="font-size:13px;color:#a9bda9;letter-spacing:.04em">Kassenzulassung</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEISTUNGEN ============ -->
+  <section id="leistungen" class="sec-pad" style="padding:96px 26px;max-width:1180px;margin:0 auto">
+    <div style="max-width:660px;margin-bottom:50px">
+      <span style="font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:600">Leistungen</span>
+      <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:42px;line-height:1.1;margin:14px 0 16px;color:var(--sage-deep)">Was wir für Ihre Füße tun</h2>
+      <p style="font-size:18px;color:var(--muted);margin:0">Von der routinemäßigen Fußpflege bis zur Behandlung schmerzhafter Nagel- und Hautprobleme – alles fachgerecht, in einer Praxis mit modernster Technik.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px">
+
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:32px 28px">
+        <div style="width:52px;height:52px;border-radius:14px;background:var(--sage-soft);color:var(--sage-dark);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px">✂</div>
+        <h3 style="font-family:'Newsreader',serif;font-size:23px;font-weight:600;margin:0 0 10px;color:var(--ink)">Nagelbehandlung</h3>
+        <p style="color:var(--muted);font-size:15.5px;margin:0 0 16px">Fachgerechte Pflege bei alltäglichen und krankhaften Nagelveränderungen.</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:15px">
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Podologischer Nagelschnitt</li>
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Verdickte Nägel (Onychauxis)</li>
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Eingewachsene Nägel (Unguis incarnatus)</li>
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Nagelpilz – unterstützende Behandlung</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:32px 28px">
+        <div style="width:52px;height:52px;border-radius:14px;background:var(--sage-soft);color:var(--sage-dark);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px">◠</div>
+        <h3 style="font-family:'Newsreader',serif;font-size:23px;font-weight:600;margin:0 0 10px;color:var(--ink)">Nagelkorrektur &amp; Spangentechnik</h3>
+        <p style="color:var(--muted);font-size:15.5px;margin:0 0 16px">Sanfte Korrektur eingewachsener oder gerollter Nägel – schmerzarm und dauerhaft.</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:15px">
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Orthonyxie (Nagelkorrekturspangen)</li>
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Individuell angefertigte Spangen</li>
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Begleitung über mehrere Termine</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:32px 28px">
+        <div style="width:52px;height:52px;border-radius:14px;background:var(--sage-soft);color:var(--sage-dark);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px">✦</div>
+        <h3 style="font-family:'Newsreader',serif;font-size:23px;font-weight:600;margin:0 0 10px;color:var(--ink)">Hautbehandlung</h3>
+        <p style="color:var(--muted);font-size:15.5px;margin:0 0 16px">Linderung bei Druckstellen, Hornhaut und schmerzhaften Hühneraugen.</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:15px">
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Hühneraugen (Clavi)</li>
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Übermäßige Hornhaut (Hyperkeratose)</li>
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Druckentlastung &amp; Orthosen</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:32px 28px">
+        <div style="width:52px;height:52px;border-radius:14px;background:var(--sage-soft);color:var(--sage-dark);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px">◉</div>
+        <h3 style="font-family:'Newsreader',serif;font-size:23px;font-weight:600;margin:0 0 10px;color:var(--ink)">Prävention &amp; Beratung</h3>
+        <p style="color:var(--muted);font-size:15.5px;margin:0 0 16px">Vorsorge und individuelle Beratung – besonders wichtig bei Diabetes.</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;font-size:15px">
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Anamnese, Sicht- &amp; Tastbefund</li>
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Diabetiker-Fußpflege</li>
+          <li style="display:flex;gap:10px"><span style="color:var(--sage)">•</span> Beratung zur Fußgesundheit</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Hausbesuche banner -->
+    <div class="two-col" style="margin-top:22px;display:grid;grid-template-columns:1.4fr 1fr;gap:0;background:var(--sage-soft);border-radius:22px;overflow:hidden;border:1px solid var(--line)">
+      <div style="padding:38px 40px;display:flex;flex-direction:column;justify-content:center">
+        <span style="font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-dark);font-weight:600">Für Zuhause</span>
+        <h3 style="font-family:'Newsreader',serif;font-size:28px;font-weight:600;margin:10px 0 10px;color:var(--sage-deep)">Hausbesuche</h3>
+        <p style="color:var(--sage-dark);font-size:16px;margin:0 0 20px;max-width:440px">Sie können nicht in die Praxis kommen? Für Patientinnen und Patienten mit eingeschränkter Mobilität bieten wir die podologische Behandlung auch bei Ihnen zu Hause an.</p>
+        <a href="#kontakt" style="text-decoration:none;align-self:flex-start;background:var(--sage-dark);color:#fff;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px">Hausbesuch anfragen →</a>
+      </div>
+      <image-slot id="hausbesuch" style="width:100%;height:100%;min-height:220px" shape="rect" placeholder="Foto Hausbesuch / Behandlung"></image-slot>
+    </div>
+  </section>
+
+  <!-- ============ WARUM WIR ============ -->
+  <section id="warum" style="background:var(--cream)">
+    <div class="sec-pad" style="padding:96px 26px;max-width:1180px;margin:0 auto">
+      <div style="max-width:660px;margin-bottom:48px">
+        <span style="font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:600">Warum Podologie Siebrecht</span>
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:42px;line-height:1.1;margin:14px 0 0;color:var(--sage-deep)">Gute Gründe, uns Ihre Füße anzuvertrauen</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px 26px">
+          <div style="font-size:30px;margin-bottom:14px">🛡️</div>
+          <h3 style="font-family:'Newsreader',serif;font-size:21px;font-weight:600;margin:0 0 8px">Kassenzulassung</h3>
+          <p style="color:var(--muted);font-size:15px;margin:0">Verordnete podologische Behandlungen rechnen wir direkt mit Ihrer Krankenkasse ab.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px 26px">
+          <div style="font-size:30px;margin-bottom:14px">✨</div>
+          <h3 style="font-family:'Newsreader',serif;font-size:21px;font-weight:600;margin:0 0 8px">Höchste Hygiene</h3>
+          <p style="color:var(--muted);font-size:15px;margin:0">Sterile Instrumente und geprüfte Aufbereitung nach medizinischem Standard – zu Ihrer Sicherheit.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px 26px">
+          <div style="font-size:30px;margin-bottom:14px">🎓</div>
+          <h3 style="font-family:'Newsreader',serif;font-size:21px;font-weight:600;margin:0 0 8px">Fachliche Qualifikation</h3>
+          <p style="color:var(--muted);font-size:15px;margin:0">Staatlich geprüfte Podologin und sektorale Heilpraktikerin – Mitglied im ZFD.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px 26px">
+          <div style="font-size:30px;margin-bottom:14px">🕊️</div>
+          <h3 style="font-family:'Newsreader',serif;font-size:21px;font-weight:600;margin:0 0 8px">Zeit &amp; Zuwendung</h3>
+          <p style="color:var(--muted);font-size:15px;margin:0">Jede Behandlung ist individuell – wir nehmen uns Zeit und beraten Sie in Ruhe.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px 26px">
+          <div style="font-size:30px;margin-bottom:14px">🚌</div>
+          <h3 style="font-family:'Newsreader',serif;font-size:21px;font-weight:600;margin:0 0 8px">Gut erreichbar</h3>
+          <p style="color:var(--muted);font-size:15px;margin:0">Zentral in Ludwigsburg, direkt an der Bushaltestelle Schorndorfer Tor.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px 26px">
+          <div style="font-size:30px;margin-bottom:14px">🏠</div>
+          <h3 style="font-family:'Newsreader',serif;font-size:21px;font-weight:600;margin:0 0 8px">Auch bei Ihnen zu Hause</h3>
+          <p style="color:var(--muted);font-size:15px;margin:0">Hausbesuche für Menschen, die nicht in die Praxis kommen können.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ÜBER MICH ============ -->
+  <section id="ueber-mich" class="sec-pad" style="padding:96px 26px;max-width:1180px;margin:0 auto">
+    <div class="two-col" style="display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:center">
+      <div style="position:relative">
+        <image-slot id="portrait" style="width: 100%; height: 560px; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(44,65,51,0.16); background: url(&quot;https://image.jimcdn.com/app/cms/image/transf/dimension=1204x10000:format=jpg/path/s264d99f32bf4a51c/image/i7c996ee34b7cab9b/version/1498404581/image.jpg&quot;) center / cover no-repeat" shape="rounded" radius="24" placeholder="Portrait Sofie Siebrecht"></image-slot>
+        <div style="position:absolute;right:-18px;top:32px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 18px;box-shadow:0 12px 30px rgba(44,65,51,0.14);font-size:14px;font-weight:600;color:var(--sage-dark)">Mitglied im ZFD</div>
+      </div>
+      <div>
+        <span style="font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:600">Über mich</span>
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:42px;line-height:1.08;margin:14px 0 20px;color:var(--sage-deep)">Sofie Siebrecht</h2>
+        <p style="font-size:18px;color:var(--muted);margin:0 0 18px;max-width:520px">Meine Ausbildung zur Podologin habe ich an der Medizinischen Akademie in Baden-Baden mit dem Examen zur <strong style="color:var(--ink);font-weight:600">staatlich geprüften Podologin</strong> abgeschlossen.</p>
+        <p style="font-size:18px;color:var(--muted);margin:0 0 18px;max-width:520px">Seit September 2016 besteht meine mit modernster Technik eingerichtete Praxis in der Schorndorfer Straße 79 in Ludwigsburg. Ich widme mich der Gesunderhaltung, Heilung und Pflege Ihrer Füße.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:26px;max-width:480px">
+          <div style="display:flex;gap:12px;align-items:center;font-size:15.5px"><span style="color:var(--sage);font-size:18px">✓</span> Staatlich geprüfte Podologin</div>
+          <div style="display:flex;gap:12px;align-items:center;font-size:15.5px"><span style="color:var(--sage);font-size:18px">✓</span> Sektorale Heilpraktikerin (Podologie)</div>
+          <div style="display:flex;gap:12px;align-items:center;font-size:15.5px"><span style="color:var(--sage);font-size:18px">✓</span> Mitglied im Zentralverband der Podologen (ZFD)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABLAUF ============ -->
+  <section id="ablauf" style="background:var(--sage-deep);color:#eaf1e7">
+    <div class="sec-pad" style="padding:96px 26px;max-width:1180px;margin:0 auto">
+      <div style="max-width:660px;margin-bottom:52px">
+        <span style="font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage-mid);font-weight:600">So läuft es ab</span>
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:42px;line-height:1.1;margin:14px 0 16px;color:#fff">In vier Schritten zu gepflegten Füßen</h2>
+        <p style="font-size:18px;color:#b6c8b4;margin:0">Ihr erster Termin ist unkompliziert. So sieht der Weg zu Ihrer Behandlung aus.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px">
+        <div>
+          <div style="width:50px;height:50px;border-radius:14px;background:rgba(255,255,255,0.1);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Newsreader',serif;font-size:22px;margin-bottom:18px">1</div>
+          <h3 style="font-family:'Newsreader',serif;font-size:21px;font-weight:600;margin:0 0 8px;color:#fff">Termin vereinbaren</h3>
+          <p style="color:#b6c8b4;font-size:15px;margin:0">Rufen Sie uns an oder senden Sie eine Anfrage. Wir finden gemeinsam einen passenden Termin.</p>
+        </div>
+        <div>
+          <div style="width:50px;height:50px;border-radius:14px;background:rgba(255,255,255,0.1);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Newsreader',serif;font-size:22px;margin-bottom:18px">2</div>
+          <h3 style="font-family:'Newsreader',serif;font-size:21px;font-weight:600;margin:0 0 8px;color:#fff">Anamnese &amp; Befund</h3>
+          <p style="color:#b6c8b4;font-size:15px;margin:0">Wir erfassen Ihre Beschwerden und schauen uns Ihre Füße gründlich an.</p>
+        </div>
+        <div>
+          <div style="width:50px;height:50px;border-radius:14px;background:rgba(255,255,255,0.1);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Newsreader',serif;font-size:22px;margin-bottom:18px">3</div>
+          <h3 style="font-family:'Newsreader',serif;font-size:21px;font-weight:600;margin:0 0 8px;color:#fff">Behandlung</h3>
+          <p style="color:#b6c8b4;font-size:15px;margin:0">Individuelle, schonende Behandlung mit modernster Technik – in ruhiger Atmosphäre.</p>
+        </div>
+        <div>
+          <div style="width:50px;height:50px;border-radius:14px;background:rgba(255,255,255,0.1);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Newsreader',serif;font-size:22px;margin-bottom:18px">4</div>
+          <h3 style="font-family:'Newsreader',serif;font-size:21px;font-weight:600;margin:0 0 8px;color:#fff">Beratung &amp; Folgetermin</h3>
+          <p style="color:#b6c8b4;font-size:15px;margin:0">Sie erhalten Tipps zur Pflege und – wenn sinnvoll – gleich einen Folgetermin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KONTAKT ============ -->
+  <section id="kontakt" class="sec-pad" style="padding:96px 26px;max-width:1180px;margin:0 auto">
+    <div style="max-width:660px;margin-bottom:48px">
+      <span style="font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:600">Termin &amp; Kontakt</span>
+      <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:42px;line-height:1.1;margin:14px 0 16px;color:var(--sage-deep)">Vereinbaren Sie Ihren Termin</h2>
+      <p style="font-size:18px;color:var(--muted);margin:0">Am schnellsten erreichen Sie uns telefonisch. Gerne können Sie uns auch eine Nachricht hinterlassen – wir melden uns zeitnah zurück.</p>
+    </div>
+
+    <div class="contact-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start">
+
+      <!-- Left: info -->
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <a href="tel:+4971414739500" style="text-decoration:none;background:var(--sage-dark);color:#fff;border-radius:20px;padding:28px 30px;display:flex;align-items:center;gap:18px">
+          <span style="width:54px;height:54px;border-radius:14px;background:rgba(255,255,255,0.14);display:flex;align-items:center;justify-content:center;font-size:26px">☏</span>
+          <span><span style="display:block;font-size:13px;color:#c4d4c1;letter-spacing:.04em">Jetzt anrufen</span><span style="display:block;font-family:'Newsreader',serif;font-size:26px;font-weight:600">07141 / 47 39 500</span></span>
+        </a>
+
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:26px 28px">
+          <h3 style="font-family:'Newsreader',serif;font-size:19px;font-weight:600;margin:0 0 14px;color:var(--ink)">So finden Sie uns</h3>
+          <p style="margin:0;color:var(--muted);font-size:15.5px;line-height:1.7">
+            <strong style="color:var(--ink)">Praxis für Podologie · Sofie Siebrecht</strong><br>
+            Schorndorfer Straße 79<br>71638 Ludwigsburg
+          </p>
+          <div style="height:1px;background:var(--line);margin:18px 0"></div>
+          <p style="margin:0;color:var(--muted);font-size:14.5px;line-height:1.7">
+            <strong style="color:var(--ink)">Mit dem Bus:</strong> Haltestelle Schorndorfer Tor<br>
+            Linie 425-6 (Oßweil) · 431 (Neckarrems) · 433 (Poppenweiler)
+          </p>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Schorndorfer+Stra%C3%9Fe+79+71638+Ludwigsburg" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;margin-top:16px;color:var(--sage-dark);font-weight:600;font-size:15px">Route in Google Maps öffnen →</a>
+        </div>
+
+        <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px 26px">
+            <h3 style="font-family:'Newsreader',serif;font-size:18px;font-weight:600;margin:0 0 12px;color:var(--ink)">Praxiszeiten</h3>
+            <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px;color:var(--muted)">
+              <div style="display:flex;justify-content:space-between;gap:10px"><span>Mo – Do</span><span style="color:var(--ink);font-weight:600">7:00 – 17:00</span></div>
+              <div style="display:flex;justify-content:space-between;gap:10px"><span>Freitag</span><span style="color:var(--ink);font-weight:600">8:00 – 13:00</span></div>
+              <div style="display:flex;justify-content:space-between;gap:10px"><span>Sa – So</span><span>geschlossen</span></div>
+            </div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px 26px">
+            <h3 style="font-family:'Newsreader',serif;font-size:18px;font-weight:600;margin:0 0 12px;color:var(--ink)">Telefonzeiten</h3>
+            <div style="display:flex;flex-direction:column;gap:7px;font-size:14.5px;color:var(--muted)">
+              <div style="display:flex;justify-content:space-between;gap:10px"><span>Mo – Do</span><span style="color:var(--ink);font-weight:600">7–12 &amp; 13–17</span></div>
+              <div style="display:flex;justify-content:space-between;gap:10px"><span>Freitag</span><span style="color:var(--ink);font-weight:600">8:00 – 12:00</span></div>
+            </div>
+            <p style="margin:12px 0 0;font-size:12.5px;color:var(--muted)">Fax: 07141 / 48 70 388</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:34px 32px;box-shadow:0 14px 40px rgba(44,65,51,0.08)">
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:40px 10px">
+            <div style="width:64px;height:64px;border-radius:50%;background:var(--sage-soft);color:var(--sage-dark);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 18px">✓</div>
+            <h3 style="font-family:'Newsreader',serif;font-size:24px;margin:0 0 10px;color:var(--sage-deep)">Vielen Dank!</h3>
+            <p style="color:var(--muted);margin:0">Ihre Anfrage ist bei uns eingegangen. Wir melden uns zeitnah bei Ihnen. Bei dringenden Anliegen rufen Sie uns gerne direkt an.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ onSubmit }}">
+            <h3 style="font-family:'Newsreader',serif;font-size:22px;font-weight:600;margin:0 0 6px;color:var(--ink)">Terminanfrage senden</h3>
+            <p style="color:var(--muted);font-size:14.5px;margin:0 0 22px">Wir rufen Sie zurück und stimmen den Termin ab.</p>
+            <label style="display:block;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:7px">Name</label>
+            <input required="" type="text" placeholder="Ihr Name" style="width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:12px;font-size:15.5px;font-family:inherit;margin-bottom:16px;background:var(--bg);color:var(--ink)">
+            <div class="two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">
+              <div>
+                <label style="display:block;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:7px">Telefon</label>
+                <input required="" type="tel" placeholder="Rückrufnummer" style="width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:12px;font-size:15.5px;font-family:inherit;background:var(--bg);color:var(--ink)">
+              </div>
+              <div>
+                <label style="display:block;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:7px">E-Mail</label>
+                <input type="email" placeholder="Optional" style="width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:12px;font-size:15.5px;font-family:inherit;background:var(--bg);color:var(--ink)">
+              </div>
+            </div>
+            <label style="display:block;font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:7px">Ihr Anliegen</label>
+            <textarea rows="4" placeholder="Womit können wir Ihnen helfen? Wunschzeitraum?" style="width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:12px;font-size:15.5px;font-family:inherit;resize:vertical;background:var(--bg);color:var(--ink);margin-bottom:18px"></textarea>
+            <button type="submit" style="width:100%;background:var(--sage-dark);color:#fff;border:none;padding:15px;border-radius:12px;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer">Anfrage absenden</button>
+            <p style="font-size:12px;color:var(--muted);margin:14px 0 0;text-align:center">Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung Ihrer Anfrage zu. Es gilt unsere Datenschutzerklärung.</p>
+          </form>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" style="background:var(--cream)">
+    <div class="sec-pad" style="padding:96px 26px;max-width:900px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:44px">
+        <span style="font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);font-weight:600">Häufige Fragen</span>
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:42px;line-height:1.1;margin:14px 0 0;color:var(--sage-deep)">Antworten auf einen Blick</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+
+        <details data-faq="" style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 24px">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-family:'Newsreader',serif;font-size:19px;font-weight:600;color:var(--ink)">Was ist Podologie?<span class="faq-plus" style="color:var(--sage);font-size:26px;font-weight:300;flex:none">+</span></summary>
+          <p style="margin:0 0 20px;color:var(--muted);font-size:15.5px;line-height:1.7">Podologie ist die medizinische, nicht-ärztliche Heilkunde am Fuß. Anders als bei der kosmetischen Fußpflege werden hier krankhafte Veränderungen an Nägeln und Haut fachgerecht behandelt – etwa eingewachsene Nägel, Hühneraugen, Hornhaut oder verdickte Nägel. Podologinnen und Podologen sind staatlich geprüft.</p>
+        </details>
+
+        <details data-faq="" style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 24px">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-family:'Newsreader',serif;font-size:19px;font-weight:600;color:var(--ink)">Übernimmt die Krankenkasse die Kosten?<span class="faq-plus" style="color:var(--sage);font-size:26px;font-weight:300;flex:none">+</span></summary>
+          <p style="margin:0 0 20px;color:var(--muted);font-size:15.5px;line-height:1.7">Unsere Praxis besitzt die Kassenzulassung. Bei einer ärztlichen Verordnung (z. B. beim diabetischen Fußsyndrom) rechnen wir die podologische Komplexbehandlung direkt mit Ihrer gesetzlichen Krankenkasse ab. Sprechen Sie uns gerne an – wir beraten Sie, was in Ihrem Fall möglich ist.</p>
+        </details>
+
+        <details data-faq="" style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 24px">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-family:'Newsreader',serif;font-size:19px;font-weight:600;color:var(--ink)">Brauche ich eine Überweisung oder ein Rezept?<span class="faq-plus" style="color:var(--sage);font-size:26px;font-weight:300;flex:none">+</span></summary>
+          <p style="margin:0 0 20px;color:var(--muted);font-size:15.5px;line-height:1.7">Für eine reine Selbstzahler-Behandlung benötigen Sie kein Rezept – Sie können einfach einen Termin vereinbaren. Für eine Behandlung auf Kosten der Krankenkasse ist eine ärztliche Verordnung erforderlich. Wir helfen Ihnen gerne weiter.</p>
+        </details>
+
+        <details data-faq="" style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 24px">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-family:'Newsreader',serif;font-size:19px;font-weight:600;color:var(--ink)">Wie werden eingewachsene Nägel behandelt?<span class="faq-plus" style="color:var(--sage);font-size:26px;font-weight:300;flex:none">+</span></summary>
+          <p style="margin:0 0 20px;color:var(--muted);font-size:15.5px;line-height:1.7">Bei eingewachsenen Nägeln (Unguis incarnatus) setzen wir unter anderem die Spangentechnik (Orthonyxie) ein. Eine individuell angefertigte Nagelkorrekturspange richtet den Nagel schonend und schmerzarm wieder auf. Die Behandlung erstreckt sich meist über mehrere Termine.</p>
+        </details>
+
+        <details data-faq="" style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 24px">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-family:'Newsreader',serif;font-size:19px;font-weight:600;color:var(--ink)">Wie stellen Sie die Hygiene sicher?<span class="faq-plus" style="color:var(--sage);font-size:26px;font-weight:300;flex:none">+</span></summary>
+          <p style="margin:0 0 20px;color:var(--muted);font-size:15.5px;line-height:1.7">Hygiene hat für uns höchste Priorität. Alle Instrumente werden nach jedem Gebrauch fachgerecht gereinigt, desinfiziert und sterilisiert. So schützen wir Ihre und unsere Gesundheit bei jeder Behandlung.</p>
+        </details>
+
+        <details data-faq="" style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 24px">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-family:'Newsreader',serif;font-size:19px;font-weight:600;color:var(--ink)">Was bedeutet „Mitglied im ZFD“?<span class="faq-plus" style="color:var(--sage);font-size:26px;font-weight:300;flex:none">+</span></summary>
+          <p style="margin:0 0 20px;color:var(--muted);font-size:15.5px;line-height:1.7">ZFD steht für den Zentralverband der Podologen und Fußpfleger Deutschlands – den größten Berufsverband der Branche. Als Mitglied verpflichte ich mich zu anerkannten Qualitäts- und Hygienestandards und bilde mich regelmäßig fort. Für Sie ist die Mitgliedschaft ein sichtbares Zeichen für fachgerechte, geprüfte podologische Behandlung.</p>
+        </details>
+
+        <details data-faq="" style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 24px">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-family:'Newsreader',serif;font-size:19px;font-weight:600;color:var(--ink)">Bieten Sie Hausbesuche an?<span class="faq-plus" style="color:var(--sage);font-size:26px;font-weight:300;flex:none">+</span></summary>
+          <p style="margin:0 0 20px;color:var(--muted);font-size:15.5px;line-height:1.7">Ja. Wenn Sie aufgrund eingeschränkter Mobilität nicht in die Praxis kommen können, behandeln wir Sie gerne bei Ihnen zu Hause. Melden Sie sich einfach telefonisch – wir stimmen alles Weitere mit Ihnen ab.</p>
+        </details>
+
+        <details data-faq="" style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 24px">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-family:'Newsreader',serif;font-size:19px;font-weight:600;color:var(--ink)">Wie oft sollte ich zur podologischen Behandlung?<span class="faq-plus" style="color:var(--sage);font-size:26px;font-weight:300;flex:none">+</span></summary>
+          <p style="margin:0 0 20px;color:var(--muted);font-size:15.5px;line-height:1.7">Das hängt vom Befund ab. Zur Vorbeugung und Pflege ist häufig ein Abstand von vier bis acht Wochen sinnvoll. Bei akuten Beschwerden oder Erkrankungen wie Diabetes kann ein kürzerer Rhythmus nötig sein. Wir empfehlen Ihnen bei Ihrem Termin den passenden Intervall.</p>
+        </details>
+
+        <details data-faq="" style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 24px">
+          <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font-family:'Newsreader',serif;font-size:19px;font-weight:600;color:var(--ink)">Wie erreiche ich die Praxis mit öffentlichen Verkehrsmitteln?<span class="faq-plus" style="color:var(--sage);font-size:26px;font-weight:300;flex:none">+</span></summary>
+          <p style="margin:0 0 20px;color:var(--muted);font-size:15.5px;line-height:1.7">Die Praxis liegt zentral in Ludwigsburg an der Bushaltestelle Schorndorfer Tor. Es halten die Linien 425-6 (Richtung Oßweil), 431 (Richtung Neckarrems) und 433 (Richtung Poppenweiler).</p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="sec-pad" style="padding:90px 26px;max-width:1180px;margin:0 auto">
+    <div style="background:var(--sage-dark);border-radius:28px;padding:64px 40px;text-align:center;color:#fff;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:radial-gradient(circle at 20% 10%,rgba(255,255,255,0.08),transparent 45%)"></div>
+      <div style="position:relative">
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:40px;line-height:1.12;margin:0 0 16px;text-wrap:balance">Machen wir den ersten Schritt<br>zu gesunden Füßen.</h2>
+        <p style="font-size:18px;color:#cddac9;max-width:520px;margin:0 auto 30px">Rufen Sie uns an oder senden Sie eine Anfrage – wir freuen uns auf Sie.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center">
+          <a href="tel:+4971414739500" style="text-decoration:none;background:#fff;color:var(--sage-dark);padding:16px 28px;border-radius:999px;font-weight:600;font-size:17px">☏ 07141 / 47 39 500</a>
+          <a href="#kontakt" style="text-decoration:none;background:rgba(255,255,255,0.12);color:#fff;padding:16px 26px;border-radius:999px;font-weight:600;font-size:17px;border:1px solid rgba(255,255,255,0.25)">Anfrage senden</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:var(--sage-deep);color:#c3d3c0">
+    <div style="max-width:1180px;margin:0 auto;padding:56px 26px 30px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <span style="width: 40px; height: 40px; border-radius: 11px; background: url(&quot;./logo_podologie-mr7gn29a.png&quot;) center / cover no-repeat; color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Newsreader',serif; font-size: 22px"></span>
+          <span style="font-family:'Newsreader',serif;font-size:18px;color:#fff">Podologie Siebrecht</span>
+        </div>
+        <p style="margin:0;font-size:14.5px;line-height:1.7">Praxis für Podologie · medizinische Fußpflege mit Kassenzulassung.<br>Schorndorfer Straße 79, 71638 Ludwigsburg</p>
+      </div>
+      <div>
+        <h4 style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#8fa78c;margin:0 0 14px">Navigation</h4>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:14.5px">
+          <a href="#leistungen" style="text-decoration:none;color:#c3d3c0">Leistungen</a>
+          <a href="#ueber-mich" style="text-decoration:none;color:#c3d3c0">Über mich</a>
+          <a href="#ablauf" style="text-decoration:none;color:#c3d3c0">Ablauf</a>
+          <a href="#faq" style="text-decoration:none;color:#c3d3c0">FAQ</a>
+          <a href="#kontakt" style="text-decoration:none;color:#c3d3c0">Kontakt</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#8fa78c;margin:0 0 14px">Kontakt</h4>
+        <div style="display:flex;flex-direction:column;gap:9px;font-size:14.5px">
+          <a href="tel:+4971414739500" style="text-decoration:none;color:#fff;font-weight:600">07141 / 47 39 500</a>
+          <span>Fax: 07141 / 48 70 388</span>
+          <span>Mo–Do 7–17 · Fr 8–13 Uhr</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.1)">
+      <div style="max-width:1180px;margin:0 auto;padding:18px 26px;display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:13px;color:#8fa78c">
+        <span>© {{ year }} Praxis für Podologie Sofie Siebrecht</span>
+        <span style="display:flex;gap:20px"><a href="#" style="text-decoration:none;color:#8fa78c">Impressum</a><a href="#" style="text-decoration:none;color:#8fa78c">Datenschutz</a></span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#A1C25C"></rect>
+    <g transform="translate(30,26)" fill="#ffffff">
+      <ellipse cx="22" cy="16" rx="16" ry="15"></ellipse>
+      <ellipse cx="4" cy="34" rx="4.5" ry="5.5"></ellipse>
+      <ellipse cx="12" cy="41" rx="4" ry="4.8"></ellipse>
+      <ellipse cx="20" cy="44" rx="3.6" ry="4.4"></ellipse>
+      <ellipse cx="28" cy="42" rx="3.2" ry="4"></ellipse>
+    </g>
+  </svg>
+</template></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:900},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#A1C25C&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#A1C25C&quot;,&quot;#5d7f63&quot;,&quot;#2f8f83&quot;,&quot;#3f7cc0&quot;],&quot;section&quot;:&quot;Farben&quot;},&quot;bgColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#ffffff&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#ffffff&quot;,&quot;#f9fbf5&quot;,&quot;#f7f4ec&quot;],&quot;section&quot;:&quot;Farben&quot;}}">
+class Component extends DCLogic {
+  state = { navOpen: false, sent: false };
+  mix(a, b, t) {
+    const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+    const [r1, g1, b1] = p(a), [r2, g2, b2] = p(b);
+    const c = (x, y) => Math.round(x + (y - x) * t).toString(16).padStart(2, '0');
+    return '#' + c(r1, r2) + c(g1, g2) + c(b1, b2);
+  }
+  renderVals() {
+    const base = this.props.accentColor ?? '#A1C25C';
+    const bg = this.props.bgColor ?? '#ffffff';
+    const dark = this.mix(base, '#20340a', 0.55);
+    const deep = this.mix(base, '#16250a', 0.70);
+    const soft = this.mix(base, '#ffffff', 0.82);
+    const mid = this.mix(base, '#ffffff', 0.35);
+    const [dr, dg, db] = [1, 3, 5].map(i => parseInt(deep.slice(i, i + 2), 16));
+    const rootStyle = {
+      '--bg': bg,
+      '--cream': this.mix(bg, base, 0.06),
+      '--surface': '#ffffff',
+      '--sage': base,
+      '--sage-dark': dark,
+      '--sage-deep': deep,
+      '--sage-soft': soft,
+      '--sage-mid': mid,
+      '--ink': '#26302a',
+      '--muted': '#66716a',
+      '--line': `rgba(${dr},${dg},${db},0.14)`,
+      '--clay': '#b0713f',
+      background: 'var(--bg)',
+      color: 'var(--ink)',
+      fontFamily: "'Hanken Grotesk',system-ui,sans-serif",
+      fontSize: '17px',
+      lineHeight: 1.62,
+      WebkitFontSmoothing: 'antialiased',
+      overflowX: 'hidden',
+    };
+    return {
+      rootStyle,
+      navOpen: this.state.navOpen,
+      notSent: !this.state.sent,
+      sent: this.state.sent,
+      year: new Date().getFullYear(),
+      toggleNav: () => this.setState(s => ({ navOpen: !s.navOpen })),
+      closeNav: () => this.setState({ navOpen: false }),
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+    };
+  }
+}
+</script>
+</body>
+</html>
